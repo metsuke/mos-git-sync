@@ -1,0 +1,23 @@
+{
+    "management_dir": "/your/sync/dir",
+    "repositories": [
+      {
+        "name": "zx-game-maker-metsuos",
+        "url-origen": "git@github.com:rtorralba/zx-game-maker.git",
+        "url-fork": "git@github.com:metsuke/zx-game-maker-metsuos.git",
+        "branches": ["main", "preview"]
+      },
+      {
+        "name": "mos-git-sync",
+        "url-origen": "git@github.com:metsuke/mos-git-sync.git",
+        "url-fork": "git@github.com:metsuke/mos-git-sync.git",
+        "branches": ["main"]
+      },
+      {
+        "name": "mos-retrotools-launcher",
+        "url-origen": "git@github.com:metsuke/mos-retrotools-launcher.git",
+        "url-fork": "git@github.com:metsuke/mos-retrotools-launcher.git",
+        "branches": ["main"]
+      }
+    ]
+  }
