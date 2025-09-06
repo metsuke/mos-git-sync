@@ -4,6 +4,31 @@ import os
 import subprocess
 from typing import List, Dict
 
+def setup_ssh_agent():
+    """Inicia el ssh-agent y agrega la clave SSH."""
+    try:
+        # Verifica si ssh-agent ya está corriendo
+        if 'SSH_AUTH_SOCK' not in os.environ:
+            print("Iniciando ssh-agent...")
+            # Iniciar ssh-agent y capturar su salida
+            result = subprocess.run(['ssh-agent', '-s'], capture_output=True, text=True, check=True)
+            # Parsear la salida para obtener SSH_AUTH_SOCK y SSH_AGENT_PID
+            env_vars = {}
+            for line in result.stdout.splitlines():
+                if line.startswith('SSH_AUTH_SOCK') or line.startswith('SSH_AGENT_PID'):
+                    key, value = line.split('=', 1)
+                    env_vars[key.split('=')[0]] = value.split(';')[0]
+            # Actualizar variables de entorno
+            os.environ.update(env_vars)
+        else:
+            print("ssh-agent ya está corriendo.")
+
+        # Agregar la clave SSH (asegúrate de que ~/.ssh/id_rsa existe o especifica tu clave)
+        print("Agregando clave SSH...")
+        subprocess.run(['ssh-add', os.path.expanduser('~/.ssh/id_rsa')], check=True)
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"Error al configurar ssh-agent o ssh-add: {e.stderr}")
+
 def run_git_command(cmd: List[str], cwd: str) -> str:
     """Run a git command in the specified working directory."""
     try:
@@ -102,6 +127,9 @@ def sync_repo(repo: Dict, management_dir: str):
             print(f"Skipping branch '{branch}' in dev folder (not found in origin)")
 
 def main():
+    # Configurar ssh-agent al inicio
+    setup_ssh_agent()
+
     # Get script directory and construct config file path
     script_dir = os.path.dirname(os.path.abspath(__file__))
     script_name = os.path.basename(__file__)

@@ -3,7 +3,7 @@
     "repositories": [
       {
         "name": "zx-game-maker-metsuos",
-        "url-origen": "git@github.com:rtorralba/zx-game-maker.git",
+        "url-origen": "git@github.com:metsuke/zx-game-maker-metsuos.git",
         "url-fork": "git@github.com:metsuke/zx-game-maker-metsuos.git",
         "branches": ["main", "preview"]
       },
