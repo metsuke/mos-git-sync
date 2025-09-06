@@ -1,3 +1,5 @@
+![Gz8I3WjW4AAcjE2](https://github.com/user-attachments/assets/a2de167a-816c-4931-a483-f1cce591707d)
+
 # mos-git-sync
 
 **[Español](#español) | [English](#english)**
